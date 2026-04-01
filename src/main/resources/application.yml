@@ -1,0 +1,56 @@
+# src/main/resources/application.yml
+server:
+  port: 8080
+
+spring:
+  application:
+    name: board
+
+  # H2 Database 설정 (개발용)
+  datasource:
+    url: jdbc:h2:mem:test
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  # H2 Console 활성화
+  h2:
+    console:
+      enabled: true  # http://localhost:8080/h2-console
+
+  # JPA 설정
+  jpa:
+    hibernate:
+      ddl-auto: update    # 개발: create, 운영: validate
+    show-sql: true        # SQL 로그 출력
+    properties:
+      hibernate:
+        format_sql: true  # SQL 포맷팅
+
+  # Thymeleaf 설정
+  thymeleaf:
+    cache: false          # 개발 시 캐시 비활성화
+
+springdoc:
+  swagger-ui:
+    # 스웨거 화면 접속 경로 (http://localhost:8080/swagger-ui.html)
+    path: /swagger-ui.html
+    # API 그룹 정렬 순서
+    groups-order: ASC
+    # HTTP 메서드 정렬 순서 (GET, POST 순)
+    operations-sorter: alpha
+    # 요청 소요 시간 표시
+    display-request-duration: true
+  api-docs:
+    # OpenAPI 스펙(JSON 데이터)이 나오는 경로
+    path: /api-docs
+  # 컨트롤러뿐만 아니라 Spring Actuator 등도 표시할지 여부
+  show-actuator: true
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+
+# 로깅 설정
+logging:
+  level:
+    com.example.board: DEBUG
+    org.hibernate.SQL: DEBUG
